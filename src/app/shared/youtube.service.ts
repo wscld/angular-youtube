@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,7 @@ export class YoutubeService {
       params: {
         part: 'id,snippet',
         type: 'video',
-        key: 'AIzaSyAivHmEjrGsTSYile8LvxwH__nqEyEEVYQ',
+        key: environment.youtubeKey,
         q,
         pageToken
       }
@@ -42,7 +44,7 @@ export class YoutubeService {
     return this.http.get('https://www.googleapis.com/youtube/v3/videos', {
       params: {
         part: 'snippet,statistics',
-        key: 'AIzaSyAivHmEjrGsTSYile8LvxwH__nqEyEEVYQ',
+        key: environment.youtubeKey,
         id
       }
     }).pipe(
