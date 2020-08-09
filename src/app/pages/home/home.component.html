@@ -1,0 +1,22 @@
+<mat-card [@search]="list ? 'default' : 'middle'">
+    <mat-form-field class="full-width">
+        <mat-label>Pesquisar vídeo</mat-label>
+        <input #input matInput type="text" (keyup.enter)="onEnter(input.value)" [value]="list?.term">
+    </mat-form-field>
+    <button mat-button class="full-width" (click)=onEnter(input.value) [disabled]="loading">Pesquisar</button>
+</mat-card>
+
+
+
+<mat-card class="list" *ngIf="list">
+    <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let video of list.videos" (click)="onNavigate(video)">
+            <img matListAvatar [src]="video.thumbnail" alt="...">
+            <h3 matLine> {{video.title}} </h3>
+            <p matLine>
+                <span> {{video.description}} </span>
+            </p>
+        </mat-list-option>
+    </mat-selection-list>
+</mat-card>
+<button mat-button class="full-width load-more" (click)=onLoadMore() *ngIf="list" [disabled]="loading">Carregar Mais</button>
